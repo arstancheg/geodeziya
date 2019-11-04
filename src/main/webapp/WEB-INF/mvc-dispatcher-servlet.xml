@@ -1,0 +1,197 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:beans="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx
+          http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+
+       default-destroy-method="destroyObject">
+
+    <context:component-scan base-package="organizaciitelefony"/>
+
+    <bean            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="useNotAcceptableStatusCode"
+                        value="false" />
+        <property name="contentNegotiationManager">
+            <bean                   class="org.springframework.web.accept.ContentNegotiationManager">
+                <constructor-arg>
+                    <bean                            class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+                        <constructor-arg>
+                            <map>
+                                <entry key="html" value="text/html" />
+                                <entry key="json" value="application/json" />
+                            </map>
+                        </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </property>
+
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+                <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+                <bean id="jspView"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/pages/" />
+                    <property name="suffix" value=".jsp" />
+                </bean>
+            </list>
+        </property>
+
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+
+
+            </list>
+        </property>
+
+    </bean>
+  <!--  <bean id="stringHttpMessageConverter">
+        <constructor-arg index="0" name="defaultCharset" value="UTF-8">
+            <property name="supportedMediaTypes">
+                <list>
+                    <value>application/xml</value>
+                    <value>text/xml</value>
+                    <value>application/x-www-form-urlencoded</value>
+                </list>
+            </property>
+        </constructor-arg></bean>-->
+
+    <mvc:resources mapping="/resources/" location="resources"></mvc:resources>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="docxViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="organizaciitelefony.word.DocxView"></property>
+        <property name="order" value="1"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".docx"/>
+    </bean>
+
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Database Information -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+
+                  value="jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/heroku_ccd970d45aa3b0e?reconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8&amp;useSSL=false&amp;autoReconnect=true"/>
+        <property name="username" value="b5bb91abca1055"/>
+        <property name="password" value="f9763d23"/>
+
+    </bean>
+
+    <!-- Hibernate 5 SessionFactory Bean definition -->
+    <bean id="hibernate5AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>organizaciitelefony.model.Rekvizity</value>
+                <value>organizaciitelefony.model.Dogovor</value>
+                <value>organizaciitelefony.model.NZTNorm</value>
+                <value>organizaciitelefony.model.Nzt</value>
+                <value>organizaciitelefony.model.NztTable</value>
+                <value>organizaciitelefony.model.Nzt20PrilozhenieA</value>
+                <value>organizaciitelefony.model.VidZdaniya</value>
+                <value>organizaciitelefony.model.Smety</value>
+                <value>organizaciitelefony.model.ZadanieNaProekt</value>
+                <value>organizaciitelefony.model.Geodeziya</value>
+                <value>organizaciitelefony.model.GeodeziyaYur</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+                </prop>
+                <!-- <prop key="hibernate.connection.useUnicode">true</prop>
+                 <prop key="hibernate.connection.characterEncoding">UTF-8</prop>!-->
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="spring.jpa.hibernate.ddl-auto">create</prop>
+                <prop key="spring.jpa.hibernate.naming-strategy">org.hibernate.cfg.ImprovedNamingStrategy
+                </prop>
+                <prop key="spring.jpa.properties.hibernate.search.default.directory_provider">filesystem</prop>
+                <prop key="spring.jpa.properties.hibernate.search.default.indexBase">indexes</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/CONTRACT</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+
+
+            </props>
+        </property>
+
+
+
+    </bean>
+    <!-- EntityManagerFactory -->
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--Поставщик данных - hibernate-->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <!--поиск сущностей в этом пакете-->
+        <property name="packagesToScan" value="organizaciitelefony"/>
+        <!--детали конфигурации поставщика постоянства (hibernate) -->
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.jdbc.batch_size">10</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--BookDao and BookService beans-->
+    <!--   <bean id="organizaciiDao" class="organizaciitelefony.dao.OrganizaciiDaoImpl" init-method="initObject"
+             destroy-method="destroyDAO">
+           <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+
+       </bean>
+
+
+       <bean id="rekvizityServise" class="organizaciitelefony.service.RekvizityServiseImpl" init-method="initObject1"
+             destroy-method="destroyObject1">
+           <property name="organizaciiDao" ref="organizaciiDao"/>
+       </bean>-->
+    <!-- <beans:property name="sessionFactory"                    ref="hibernate5AnnotatedSessionFactory" />-->
+
+    <context:component-scan base-package="organizaciitelefony"/>
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- <bean id="transactionManager"
+           class="org.springframework.orm.hibernate5.HibernateTransactionManager"></bean>-->
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <!--Обеспечивает работу с транзакциями в Spring -->
+    <!--<bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>-->
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+</beans>
