@@ -1,0 +1,184 @@
+html, body {
+    color: rgb(34, 34, 34);
+    font: 100%/1.4em "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/** {margin:0; padding:0;}*/
+
+/*
+
+.menu-wrap {
+    margin:0; padding:0;
+    background-color:#53bd84;
+    height:50px;
+    line-height:50px;
+    position:relative;
+    !*width:770px;*!
+    margin:auto;
+    !*margin-top:80px;*!
+}
+
+.menu-wrap ul {
+    margin:0; padding:0;
+    list-style:none;
+}
+
+.menu-wrap ul li{
+    position: relative;
+    display: block;
+}
+.menu-wrap ul li a {
+    margin:0; padding:0;
+    float:left;
+    width:150px;
+    display:block;
+    text-align:center;
+    color:#FFF;
+    text-decoration:none;
+    text-transform:uppercase;
+}
+
+.menu-wrap ul li a:hover {
+
+    background-color:#666;
+    display:block;
+}
+
+.menu-wrap ul li:hover ul {
+
+    display:block;
+}
+
+.menu-wrap ul ul {
+    margin:0; padding:0;
+    display:none;
+    list-style:none;
+    position:absolute;
+    background-color:#53bd84;
+    left:0px;
+    top:50px;
+    width:190px;
+}
+
+.menu-wrap ul ul li {
+  position: relative;
+}
+.menu-wrap ul ul li a {
+    margin:0; padding:0;
+    float:none;
+    display:block;
+    padding-left:30px;
+    text-align:left;
+    width:160px;
+}
+
+.menu-wrap ul ul li a:hover {
+
+    color:#fff;
+}*/
+
+nav {
+    margin: 0;
+    background-color: #53bd84;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+}
+
+nav ul li {
+    display:inline-block;
+    background-color: #53bd84;
+}
+
+nav a {
+    display:block;
+    padding:0 10px;
+    color:#FFF;
+    font-size:20px;
+    line-height: 60px;
+    text-decoration:none;
+}
+
+nav a:hover {
+    background-color: #000000;
+}
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 60px; /* the height of the main nav */
+    z-index: 500;
+}
+
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+    display:inherit;
+}
+
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+    width:170px;
+    float:none;
+    display:list-item;
+    position: relative;
+}
+
+/* Second, Third and more Tiers	*/
+nav ul ul ul li {
+    position: relative;
+    top:-60px;
+    left:170px;
+}
+
+
+/* Change this in order to change the Dropdown symbol */
+li > a:after { content:  ' +'; }
+li > a:only-child:after { content: ''; }
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: #ccc;
+}
+
+.tg td {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #fff;
+}
+
+.tg th {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+    background-color: #f9f9f9
+}
+
+textarea {
+    width: 500px;
+    height: 100px;
+}

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url"/>
+    <property name="connection.driver_class"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+    <!-- hibernate.cfg.xml -->
+    <!--<property name="c3p0.min_size">5</property>-->
+    <!--<property name="c3p0.max_size">20</property>-->
+    <!--<property name="c3p0.timeout">1800</property>-->
+    <!--<property name="c3p0.max_statements">50</property>-->
+    <!-- no "connection.pool_size" entry! -->
+  </session-factory>
+</hibernate-configuration>
