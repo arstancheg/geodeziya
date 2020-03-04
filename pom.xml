@@ -22,7 +22,7 @@
         <hibernate.version>5.4.1.Final</hibernate.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <org.aspectj-version>1.9.2</org.aspectj-version>
-        <jackson-version>2.9.8</jackson-version>
+        <jackson-version>2.10.3</jackson-version>
     </properties>
 
 
